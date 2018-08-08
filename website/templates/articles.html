@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ plate }}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.js"></script>
+    <style>
+			body {
+				background-color: #CCC;
+			}
+
+			#content {
+				background-color: white;
+				margin-top:2em;
+                padding-bottom:2em;
+                margin-bottom:2em;
+			}
+
+			.col-md-3 li a:hover {
+				color: black;
+			}
+
+			.col-md-3 li a {
+				border: 0px;
+				color: white;
+				border-radius: 0px;
+				margin-right: 0px;
+			}
+
+			.col-md-3 ul {
+				background-color: rgb(27, 27, 27);
+			}
+
+    </style>
+</head>
+
+<body>
+<a href=""></a>
+{% for article in articles %}
+    {% if article.column == plate %}
+        <a href="/detail/{{ article.id }}/">{{ article.title }}</a>--{{ article.author }}
+<br>
+    {% endif %}
+{% endfor %}
+</body>
+
+</html>

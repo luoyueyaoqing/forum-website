@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title>Register</title>
+		<link rel="stylesheet" href="/static/css/bootstrap.css" />
+        <style>
+            body {
+				background-color: #CCC;
+			}
+			#content {
+				background-color: white;
+				margin-top:2em;
+				padding-top:2em;
+                padding-bottom:2em;
+			}
+        </style>
+	</head>
+	<body>
+		<div class="container" id="content">
+            {% if messages %}
+                {% for message in messages %}
+            <div class="alert {%if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+			<form  action="/register/" method="post">
+			  <div class="form-group">
+			    <label for="name">账户名</label>
+			    <input name="username" class="form-control" placeholder="请输入账户名" />
+			  </div>
+			  <div class="form-group">
+			    <label for="name">密码</label>
+			    <input name="password1" class="form-control" placeholder="请输入密码" />
+			  </div>
+			  <div class="form-group">
+			    <label for="name">核实密码</label>
+			    <input name="password2" class="form-control" placeholder="请再次输入密码" />
+			  </div>
+                {% csrf_token %}
+                <button type="submit" class="btn btn-default">注册</button>
+                <a href="/login" class="btn btn-info" style="float:right">去登陆</a>
+
+			</form>
+		</div>
+	</body>
+</html>

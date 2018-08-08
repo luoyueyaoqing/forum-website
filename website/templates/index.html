@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>论坛首页</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <style>
+			body {
+				background-color: #CCC;
+			}
+			
+			#content {
+				background-color: white;
+				margin-top:2em;
+				padding-top:2em;
+			}
+			
+			.col-md-3 li a:hover {
+				color: black;
+			}
+			
+			.col-md-3 li a {
+				border: 0px;
+				color: white;
+				border-radius: 0px;
+				margin-right: 0px;
+			}
+			
+			.col-md-3 ul {
+				background-color: rgb(27, 27, 27);
+			}
+
+    </style>
+</head>
+
+<body>
+{% if user.is_authenticated %}
+    <h3>welcome--{{ user}}</h3>
+    <a href="{% url 'logout' %}">注销</a>
+{% else %}
+    <a href="{% url 'register' %}">注册</a>
+    <br>
+    <a href="{% url 'login' %}">登录</a>
+{% endif %}
+<hr>
+<h3>版块:</h3>
+
+{% for plate in plates %}
+    <a href="/articles/{{ plate.id }}/">{{ plate.title }}</a>
+    <br>
+{% endfor %}
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit</title>
+</head>
+<body>
+<form method="post" action="">
+    {% csrf_token %}
+    <input name="title" value="{{ article.title }}" placeholder="请输入标题">
+    <br>
+    <input name="content" value="{{ article.content }}" placeholder="请输入内容">
+    <br>
+    <button type="submit">发表文章</button>
+</form>
+</body>
+</html>

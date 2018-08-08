@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }}</title>
+</head>
+<body>
+{% if messages %}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+{% endif %}
+{% if request.user == article.author or request.user in article.column.users.all %}
+    <a href="/edit/{{ article.id }}/">编辑文章</a>
+    <a href="/del_article/{{ article.id }}/">删除文章</a>
+{% endif %}
+<hr>
+        {{ article.title }}--{{ article.author }}
+        <br>
+        {{ article.content }}
+<hr>
+<form method="post" action="/comment/{{ article.id }}/">
+    {% csrf_token %}
+    评论: <input name="content" placeholder="请文明用语">
+    <br>
+    <button type="submit">发表评论</button>
+</form>
+<hr>
+{% if article.comments.all %}
+    <h3>共{{ article.comments.all|length }}条评论</h3>
+{% else %}
+    <h3>没有评论</h3>
+{% endif %}
+{% for comm in article.comments.all %}
+        {{ forloop.counter }}楼评论: {{ comm.user }}--{{ comm.content }}--<a href="/del_comment/{{ comm.id }}/">删除</a>
+        <hr>
+{% endfor%}
+</body>
+</html>
