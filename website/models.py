@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from tinymce.models import HTMLField
 
 
 class User(AbstractUser):
@@ -20,7 +21,7 @@ class Plate(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=64)
-    content = models.TextField()
+    content = HTMLField()
     create_time = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(to=User, related_name='articles')
     column = models.ForeignKey(to=Plate, related_name='articles')

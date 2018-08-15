@@ -5,11 +5,13 @@
     <title>{{ article.title }}</title>
 </head>
 <body>
-{% if messages %}
-    {% for message in messages %}
-        {{ message }}
-    {% endfor %}
-{% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {%if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'index' %}">返回首页</a>
+    <hr/>
 {% if request.user == article.author or request.user in article.column.users.all %}
     <a href="/edit/{{ article.id }}/">编辑文章</a>
     <a href="/del_article/{{ article.id }}/">删除文章</a>
@@ -17,7 +19,7 @@
 <hr>
         {{ article.title }}--{{ article.author }}
         <br>
-        {{ article.content }}
+        {{ article.content|safe }}
 <hr>
 <form method="post" action="/comment/{{ article.id }}/">
     {% csrf_token %}

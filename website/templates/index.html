@@ -46,11 +46,13 @@
     <a href="{% url 'login' %}">登录</a>
 {% endif %}
 <hr>
+
 <h3>版块:</h3>
 
 {% for plate in plates %}
     <a href="/articles/{{ plate.id }}/">{{ plate.title }}</a>
     <br>
+
 {% endfor %}
 
 </body>
